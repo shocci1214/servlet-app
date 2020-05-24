@@ -2,7 +2,7 @@
  * WebApp_Project
  * servlet.LoginServlet.java
  */
-package servlet;
+package servlet.auth;
 
 import java.io.IOException;
 
@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
 
         // リクエストの転送
-        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/menu.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("employee-list-servlet");
         rd.forward(request, response);
     }
 

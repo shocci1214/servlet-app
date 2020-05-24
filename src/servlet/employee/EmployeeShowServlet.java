@@ -1,12 +1,11 @@
 /*
  * WebApp_Project
- * controller.EmployeeListServlet.java
+ * servlet.employee.EmployeeShow.java
  */
-package servlet;
+package servlet.employee;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,22 +18,21 @@ import model.dao.EmployeeDAO;
 import model.entity.EmployeeBean;
 
 /**
- * 従業員一覧表示を行うサーブレット
- * @author
+ * Servlet implementation class EmployeeShowServlet
  */
-@WebServlet("/employee-list-servlet")
-public class EmployeeListServlet extends HttpServlet {
+@WebServlet("/employee-show-servlet")
+public class EmployeeShowServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EmployeeListServlet() {
+    public EmployeeShowServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
     /**
-     * GETリクエスト時の処理
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -43,31 +41,34 @@ public class EmployeeListServlet extends HttpServlet {
         // リクエストオブジェクトのエンコーディング方式の指定
         request.setCharacterEncoding("UTF-8");
 
+        // リクエストパラメータの取得
+        String employeeCode = request.getParameter("employee-code");
+
         // DAOの生成
         EmployeeDAO dao = new EmployeeDAO();
 
         try {
             // DAOの利用
-            List<EmployeeBean> employeeList = dao.selectAll();
+            EmployeeBean employee = dao.select(employeeCode);
 
             // リクエストスコープへの属性の設定
-            request.setAttribute("employeeList", employeeList);
+            request.setAttribute("employee", employee);
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
         // リクエストの転送
-        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/employee-list.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/view/employee/employee-show.jsp");
         rd.forward(request, response);
     }
 
     /**
-     * POSTリクエスト時の処理
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        // TODO Auto-generated method stub
+        doGet(request, response);
     }
 
 }

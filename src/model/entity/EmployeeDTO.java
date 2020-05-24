@@ -1,16 +1,15 @@
 /*
  * WebApp_Project
- * model.entity.EmployeeBean.java
+ * model.entity.EmployeeDTO.java
  */
 package model.entity;
 
-import java.io.Serializable;
-
 /**
- * 従業員を表すBeanオブジェクトです。
+ * 従業員を表します。
+ * m_employeeのDTOです。
  * @author Shohei Yamamoto
  */
-public class EmployeeBean implements Serializable {
+public class EmployeeDTO{
 
     /**
      * 従業員コード
@@ -48,9 +47,9 @@ public class EmployeeBean implements Serializable {
     private String birthDay;
 
     /**
-     * 部署名
+     * 部署コード
      */
-    private String sectionName;
+    private String sectionCode;
 
     /**
      * 入社日
@@ -61,13 +60,6 @@ public class EmployeeBean implements Serializable {
     * 更新日時
     */
     private String updateDateTime;
-
-    /**
-     * EmployeeBeanを構築します。
-     */
-    public EmployeeBean() {
-
-    }
 
     /**
      * フィールドEmployeeCodeの値を返します。
@@ -182,19 +174,19 @@ public class EmployeeBean implements Serializable {
     }
 
     /**
-     * フィールドsectionNameの値を取得します。
-     * @return sectionName
+     * フィールドsectionCodeの値を取得します。
+     * @return sectionCode
      */
-    public String getSectionName() {
-        return sectionName;
+    public String getSectionCode() {
+        return sectionCode;
     }
 
     /**
      * フィールドsectionEmployeeCodeの値を設定します。
      * @param sectionEmployeeCode 部署コード
      */
-    public void setSectionName(String sectionName) {
-        this.sectionName = sectionName;
+    public void setSectionCode(String sectionCode) {
+        this.sectionCode = sectionCode;
     }
 
     /**
