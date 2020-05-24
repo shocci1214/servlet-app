@@ -9,9 +9,11 @@
   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
   integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
   crossorigin="anonymous">
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 <title>従業員情報管理システム - 従業員一覧</title>
 </head>
 <body>
+
   <%
       List<EmployeeBean> employeeList = (List<EmployeeBean>) request.getAttribute("employeeList");
   %>
@@ -23,6 +25,8 @@
   <%
       } else {
   %>
+  <input type="text" id="employee-code-for-search">
+  <button type="button" id="submit">検索</button>
   <table>
     <tr>
       <th>従業員コード</th>
@@ -51,7 +55,9 @@
           }
       %>
       <td><%=employee.getSectionName()%></td>
-      <td><a href="employee-show-servlet?employee-code=<%= employee.getEmployeeCode() %>" class="btn btn-primary">詳細</a></td>
+      <td><a
+        href="employee-show-servlet?employee-code=<%=employee.getEmployeeCode()%>"
+        class="btn btn-primary">詳細</a></td>
     </tr>
     <%
         }
@@ -62,4 +68,28 @@
   %>
 
 </body>
+<script>
+	$(function() {
+
+		// ボタン押下時の処理
+		$('#submit').on('click', function() {
+			$.ajax({
+				url : "employee-list-ajax-servlet",
+				type : "GET",
+				data :
+				{ employeeCode:  $("#employee-code-for-search").val() }
+			}).done(function(result) {
+				// 通信成功時のコールバック
+				alert("入力された値は" + result + "です");
+				//$("#text1").val(result);
+			}).fail(function() {
+				// 通信失敗時のコールバック
+				alert("読み込み失敗");
+			}).always(function(result) {
+				// 常に実行する処理
+			});
+		});
+
+	});
+</script>
 </html>
